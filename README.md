@@ -8,6 +8,8 @@ Tri Dao\*, Daniel Y. Fu\*,  Khaled K. Saab, Armin W. Thomas, Atri Rudra, Christo
 International Conference on Learning Representations, 2023. Notable top-25% (spotlight).
 Paper: https://arxiv.org/abs/2212.14052
 
+![H3](assets/banner.png)
+
 # Code & model release
 
 We're in the process of releasing the model code and model weight in the next
