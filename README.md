@@ -12,8 +12,14 @@ Paper: https://arxiv.org/abs/2212.14052
 
 # Code & model release
 
-We're in the process of releasing the model code and model weight in the next
-couple of days.
+You can find model weights on the HuggingFace Hub here:
+* [125M](https://huggingface.co/danfu09/H3-125M)
+* [355M](https://huggingface.co/danfu09/H3-355M)
+* [1.3B](https://huggingface.co/danfu09/H3-1.3B)
+* [2.7B](https://huggingface.co/danfu09/H3-2.7B)
+
+An example of how to load the weights is given in `benchmarks/benchmark_generation.py`.
+More examples coming soon!
 
 ## Acknowledgments
 Some of the files related to S4D and HiPPO initialization are
