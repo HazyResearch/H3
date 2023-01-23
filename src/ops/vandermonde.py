@@ -1,9 +1,14 @@
+# TD [2023-01-05]: Copied from https://github.com/HazyResearch/state-spaces/blob/06dbbdfd0876501a7f12bf3262121badbc7658af/src/models/functional/vandermonde.py
+# We add the interface to the log vandermonde CUDA code
+
 """pykeops implementations of the Vandermonde matrix multiplication kernel used in the S4D kernel."""
+import math
 import torch
 
 from einops import rearrange, repeat
 from opt_einsum import contract
 
+import os
 
 try:
     import pykeops
@@ -165,94 +170,3 @@ if vand_log_mult_sym_fwd and vand_log_mult_sym_bwd is not None:
     log_vandermonde_fast = LogVandMultiplySymmetric.apply
 else:
     log_vandermonde_fast = None
-
-
-def data(B, N, L, conj=True):
-    v = torch.randn(B, N//2, dtype=torch.cfloat)
-    x = 0.001 * torch.rand(B, N//2) + 1j * N * torch.rand(B, N//2)
-
-    if not conj:
-        v = _conj(v)
-        x = _conj(x)
-
-    v, x = utils.convert_data(v, x)
-    return v, x
-
-def test_vandermonde():
-    B, N, L = 2, 4, 8
-    # B, N, L = 64, 64, 1024
-    v, x = data(B, N, L)
-
-    # Test correctness
-    utils.compare_outputs(
-        log_vandermonde_naive(v, x, L, conj=True),
-        log_vandermonde_lazy(v, x, L),
-        log_vandermonde(v, x, L),
-        full=False,
-        relative=True,
-    )
-
-    utils.benchmark(log_vandermonde_naive, v, x, L, repeat=100, memory=True, desc='cauchy conj slow')
-    utils.benchmark(log_vandermonde_lazy, v, x, L, repeat=100, memory=True, desc='cauchy conj slow')
-    utils.benchmark(log_vandermonde, v, x, L, repeat=100, memory=True, desc='cauchy conj pykeops')
-
-def profile_mults():
-    B, H, N, L = 1, 256, 64, 16384
-    # B, H, N, L = 1, 256, 64, 1024
-    v, x = data(H, N, L, conj=True)
-    u, = utils.convert_data(torch.randn(B, H, L, dtype=torch.cfloat))
-
-    # Test correctness
-    utils.compare_outputs(
-        log_vandermonde_naive(v, x, L, conj=True),
-        log_vandermonde_lazy(v, x, L, conj=True),
-        log_vandermonde(v, x, L, conj=True),
-        full=False,
-        relative=True,
-    )
-
-
-    # Measure speed and memory
-    repeat = 1000
-    utils.benchmark(log_vandermonde_naive, v, x, L, repeat=repeat, memory=True, desc='naive vandermonde')
-    utils.benchmark(log_vandermonde_lazy, v, x, L, repeat=repeat, memory=True, desc='fast lazy vandermonde')
-    utils.benchmark(log_vandermonde, v, x, L, repeat=repeat, memory=True, desc='fast vandermonde')
-
-    utils.benchmark(log_vandermonde_transpose_naive, u, v, x, L, repeat=repeat, memory=True, desc='naive vandermonde transpose')
-    utils.benchmark(log_vandermonde_transpose, u, v, x, L, repeat=repeat, memory=True, desc='fast vandermonde transpose')
-
-def profile_matmul():
-    H, N, L = 256, 256, 1024
-    B = 1
-    # B, N, L = 256, 64, 1024
-    v, x = data(H, N, L, conj=True)
-    v = repeat(v, 'h n -> b h n', b=B)
-
-    K = _log_vandermonde_matmul(x, L).contiguous()
-    print(K.shape)
-
-    # Test correctness
-    utils.compare_outputs(
-        log_vandermonde_naive(v, x, L, conj=True),
-        log_vandermonde_lazy(v, x, L, conj=True),
-        log_vandermonde(v, x, L, conj=True),
-        log_vandermonde_matmul(v, K),
-        full=False,
-        relative=True,
-    )
-
-
-    # Measure speed and memory
-    T = 10
-    utils.benchmark(log_vandermonde_naive, v, x, L, repeat=T, memory=True, desc='naive vandermonde')
-    utils.benchmark(log_vandermonde_lazy, v, x, L, repeat=T, memory=True, desc='fast vandermonde LazyTensor')
-    utils.benchmark(log_vandermonde, v, x, L, repeat=T, memory=True, desc='fast vandermonde Genred')
-    utils.benchmark(_log_vandermonde_matmul, x, L, repeat=T, memory=True, desc='vandermonde matrix')
-    utils.benchmark(log_vandermonde_matmul, v, K, repeat=T, memory=True, desc='vandermonde matmul')
-
-if __name__ == '__main__':
-    from benchmark import utils
-    device = 'cuda'
-    # test_vandermonde()
-    profile_mults()
-    # profile_matmul()
