@@ -21,7 +21,7 @@ parser.add_argument('--nlayer', type=int, default=24)
 parser.add_argument('--attn-layer-idx', type=list, default=[8, 16])
 parser.add_argument('--nheads', type=int, default=16)
 parser.add_argument('--ckpt', type=str, default=None)
-parser.add_argument('--promptlen', type=int, default=128)
+parser.add_argument('--promptlen', type=int, default=1024)
 parser.add_argument('--genlen', type=int, default=128)
 args = parser.parse_args()
 
