@@ -30,7 +30,8 @@ from src.models.ssm.h3 import H3
 def create_mixer_cls(ssm_cls=H3, ssm_cfg=None, attn_layer_idx=None, attn_cfg=None, layer_idx=None):
     if attn_layer_idx is not None and layer_idx in attn_layer_idx:
         causal = True if attn_cfg is None else attn_cfg.pop('causal', True)
-        mixer_cls = partial(MHA, causal=causal, **(attn_cfg if attn_cfg is not None else {}))
+        mixer_cls = partial(MHA, layer_idx=layer_idx, causal=causal, 
+                            **(attn_cfg if attn_cfg is not None else {}))
     else:
         mixer_cls = partial(ssm_cls, layer_idx=layer_idx,
                             **(ssm_cfg if ssm_cfg is not None else {}))
