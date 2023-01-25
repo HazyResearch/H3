@@ -12,7 +12,7 @@ Paper: https://arxiv.org/abs/2212.14052
 
 # Code & model release
 
-You can find model weights on the HuggingFace Hub here (under "Files and Versions" for each model):
+You can find model weights on the Hugging Face Hub here (under "Files and Versions" for each model):
 * [125M](https://huggingface.co/danfu09/H3-125M)
 * [355M](https://huggingface.co/danfu09/H3-355M)
 * [1.3B](https://huggingface.co/danfu09/H3-1.3B)
