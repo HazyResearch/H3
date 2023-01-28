@@ -195,7 +195,7 @@ class SSMLMHeadModel(nn.Module, GenerationMixin):
         def key_mapping_backbone(key):
             key = re.sub(r'^s4seq.encoder.', 'backbone.', key)
             key = re.sub(r'^embedding.', 'backbone.embeddings.word_embeddings.', key)
-            key = re.sub(r'^backbone.norm', 'backbone.ln_f', key)
+            key = re.sub(r'^backbone.norm', 'backbone.ln_0', key)
             return key
         state_dict = OrderedDict((key_mapping_backbone(k), v) for k, v in state_dict.items())
         # Remapping from our checkpoints that used a different ordering of layers in the block
