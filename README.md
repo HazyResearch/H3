@@ -20,7 +20,7 @@ You can find model weights on the Hugging Face Hub here (under "Files and Versio
 
 ## Loading weights and running inference
 
-Examples of how to load the weights and run inference are given in `benchmarks/benchmark_generation.py` and `examples/generate_text_h3.py`.
+Examples of how to load the weights and run inference are given in [benchmarks/benchmark_generation.py](benchmarks/benchmark_generation.py) and [examples/generate_text_h3.py](examples/generate_text_h3.py).
 
 Here's an example of how to download and run our 125M model (you may need to `pip install flash-attn`):
 
@@ -47,7 +47,7 @@ Here's the summary of model sizes for each model:
 | **1.3B**  |   2048     |     24     |     16     |
 | **2.7B**  |   2560     |     32     |     20     |
 
-See `examples/README.md` for examples about how to load all these models and run them!
+See [examples/README.md](examples/README.md) for examples about how to load all these models and run them!
 
 ## Acknowledgments
 Some of the files related to S4D and HiPPO initialization are
