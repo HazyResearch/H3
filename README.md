@@ -34,10 +34,7 @@ PYTHONPATH=$(pwd)/H3 python H3/examples/generate_text_h3.py --ckpt H3-125M/model
 ```
 
 You should get an output like this (may change due to sampling in the text generation):
-```
-Number of parameters: 126387456
-Hungry Hungry Hippos: Towards Language Modeling With State Space Models is a new language model that uses state-space models to create a human-like vocabulary that can help improve human understanding and judgment of language. It takes a human's past experience of language, and tries to capture their cognitive patterns. State Space Models helps the researchers make sense of language in its own terms, which helps users learn about their language of choice. State Space Models is used to develop a set of languages for researchers in an effort to help them develop more intelligent language models. The goal is to increase and develop a human-like language model using state space models. It is hoped that it will aid people to do more work to develop a language that is more
-```
+> Hungry Hungry Hippos: Towards Language Modeling With State Space Models is a new language model that uses state-space models to create a human-like vocabulary that can help improve human understanding and judgment of language. It takes a human's past experience of language, and tries to capture their cognitive patterns. State Space Models helps the researchers make sense of language in its own terms, which helps users learn about their language of choice. State Space Models is used to develop a set of languages for researchers in an effort to help them develop more intelligent language models. The goal is to increase and develop a human-like language model using state space models. It is hoped that it will aid people to do more work to develop a language that is more
 
 Here's the summary of model sizes for each model:
 | **Model** | **dmodel** | **nlayer** | **nheads** |
