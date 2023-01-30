@@ -22,7 +22,7 @@ You can find model weights on the Hugging Face Hub here (under "Files and Versio
 
 Examples of how to load the weights and run inference are given in [benchmarks/benchmark_generation.py](benchmarks/benchmark_generation.py) and [examples/generate_text_h3.py](examples/generate_text_h3.py).
 
-Here's an example of how to download and run our 125M model (you may need to `pip install flash-attn`):
+Here's an example of how to download and run our 125M model (you may need to install FlashAttention):
 
 ```
 git lfs install
