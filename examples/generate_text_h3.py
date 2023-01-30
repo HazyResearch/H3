@@ -37,7 +37,6 @@ else:
 model = SSMLMHeadModel(d_model, n_layer=n_layer, d_inner=4 * d_model, vocab_size=len(tokenizer),
                        ssm_cfg=ssm_cfg, attn_layer_idx=attn_layer_idx, attn_cfg=attn_cfg,
                        pad_vocab_size_multiple=8).to(device=device)
-print(f'Number of parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad)}')
 if args.ckpt is not None:
     state_dict = torch.load(args.ckpt, map_location=device)
     if 'pytorch-lightning_version' in state_dict:
