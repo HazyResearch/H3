@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser(description='H3 text generation')
 parser.add_argument('--dmodel', type=int, default=2048)
 parser.add_argument('--nlayer', type=int, default=24)
 parser.add_argument('--attn-layer-idx', nargs='+', type=int, default=[8,16])
+parser.add_argument('--rotary_emb_dim', type=int, default=None, help='For rotary embeddings, set to 64. Default is None.')
 parser.add_argument('--nheads', type=int, default=16)
 parser.add_argument('--ckpt', type=str, default=None)
 parser.add_argument('--genlen', type=int, default=128)
@@ -29,7 +30,10 @@ d_model = args.dmodel
 n_layer = args.nlayer
 ssm_cfg = dict(mode='diag', measure='diag-lin')
 attn_layer_idx = args.attn_layer_idx
-attn_cfg = dict(num_heads=args.nheads, rotary_emb_dim=64)
+if args.rotary_emb_dim is None:
+    attn_cfg = dict(num_heads=args.nheads)
+else:
+    attn_cfg = dict(num_heads=args.nheads, rotary_emb_dim=args.rotary_emb_dim)
 model = SSMLMHeadModel(d_model, n_layer=n_layer, d_inner=4 * d_model, vocab_size=len(tokenizer),
                        ssm_cfg=ssm_cfg, attn_layer_idx=attn_layer_idx, attn_cfg=attn_cfg,
                        pad_vocab_size_multiple=8).to(device=device)
