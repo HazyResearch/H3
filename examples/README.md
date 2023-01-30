@@ -7,6 +7,14 @@ For any of these models, you can play around with these parameters to get differ
 * `--genlen`: Maximum number of tokens to generate after the prompt. By default, 128.
 * `--top_p`, `--top_k`: Generation hyperparameters for the sampling procedure. By default, 0.9 and 50.11
 
+Here's the summary of model sizes for each model:
+| **Model** | **dmodel** | **nlayer** | **nheads** |
+| :-------- | :--------: | :--------: | :--------: |
+| **125M**  |    768     |     12     |     12     |
+| **355M**  |   1024     |     24     |     16     |
+| **1.3B**  |   2048     |     24     |     16     |
+| **2.7B**  |   2560     |     32     |     20     |
+
 ## 125M
 Commands to download and run the 125M model. You will need ~3GB GPU memory:
 ```
