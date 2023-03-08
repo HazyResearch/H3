@@ -2,7 +2,7 @@
 # ARG COMPAT=0
 ARG PERSONAL=0
 # FROM nvidia/cuda:11.3.1-devel-ubuntu20.04 as base-0
-FROM nvcr.io/nvidia/pytorch:22.12-py3 as base
+FROM nvcr.io/nvidia/pytorch:22.11-py3 as base
 
 ENV HOST docker
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
