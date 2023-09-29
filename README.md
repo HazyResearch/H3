@@ -55,7 +55,7 @@ If you use this codebase, or otherwise found our work valuable, please cite:
 ```
 @inproceedings{dao2023hungry,
   title={Hungry {H}ungry {H}ippos: Towards Language Modeling with State Space Models},
-  author={Dao, Tri and Fu, Daniel Y. and Saab, Khaled K. and Thomas, Armin W.
+  author={Fu, Daniel Y. and Dao, Tri and Saab, Khaled K. and Thomas, Armin W.
   and Rudra, Atri and R{\'e}, Christopher},
   booktitle={International Conference on Learning Representations},
   year={2023}
