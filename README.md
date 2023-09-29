@@ -4,7 +4,7 @@ This repository provides the official implementation of H3 from the
 following paper.
 
 **Hungry Hungry Hippos: Towards Language Modeling with State Space Models**  
-Tri Dao\*, Daniel Y. Fu\*,  Khaled K. Saab, Armin W. Thomas, Atri Rudra, Christopher Ré  
+Daniel Y. Fu\*,  Tri Dao\*, Khaled K. Saab, Armin W. Thomas, Atri Rudra, Christopher Ré  
 International Conference on Learning Representations, 2023. Notable top-25% (spotlight).  
 Paper: https://arxiv.org/abs/2212.14052
 
